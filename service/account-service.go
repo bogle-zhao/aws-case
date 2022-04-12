@@ -26,7 +26,7 @@ func (this *AccountService) Register(username string, password string, fileName 
 		log.Error("register error: ", err)
 		return nil, err
 	}
-	url := this.s3Repo.PutFile(fileName, *file)
+	url := this.s3Repo.PutFile(username, fileName, *file)
 	return this.accountRepository.Save(&entity.Account{
 		UserName: username,
 		Password: password,
@@ -64,7 +64,7 @@ func (this *AccountService) UpdateAvatar(username string, fileName string, file 
 		return nil, err
 	}
 
-	url := this.s3Repo.PutFile(fileName, *file)
+	url := this.s3Repo.PutFile(username, fileName, *file)
 
 	err = this.accountRepository.UpdateAvatar(username, url)
 	if err != nil {

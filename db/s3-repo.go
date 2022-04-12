@@ -14,8 +14,8 @@ type S3Repo struct {
 	bucket string
 }
 
-func (s S3Repo) PutFile(filename string, file multipart.File) string {
-	filename = uuid.NewV4().String() + filename
+func (s S3Repo) PutFile(username string, filename string, file multipart.File) string {
+	filename = username + "/" + uuid.NewV4().String() + filename
 
 	url, err := preUrl(filename, s)
 	if err != nil {
@@ -25,6 +25,7 @@ func (s S3Repo) PutFile(filename string, file multipart.File) string {
 	input := &s3.PutObjectInput{
 		Bucket: aws.String(s.bucket),
 		Key:    aws.String(filename),
+		ACL:    "public-read",
 		Body:   file,
 	}
 
@@ -53,6 +54,6 @@ func preUrl(filename string, s S3Repo) (string, error) {
 func NewS3Repo() S3Repo {
 	return S3Repo{
 		client: s3.NewFromConfig(LoadAwsConfig()),
-		bucket: "user-info-test",
+		bucket: "mmx001testcase",
 	}
 }

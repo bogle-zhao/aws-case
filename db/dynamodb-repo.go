@@ -79,7 +79,7 @@ func (dbRepo dynamoDBRepo) UpdateAvatar(username string, avatar string) error {
 
 func NewDynamoDBRepository() AccountRepository {
 	return &dynamoDBRepo{
-		tableName: "t_user",
+		tableName: "account_case",
 		client:    dynamodb.NewFromConfig(LoadAwsConfig()),
 	}
 }
