@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	web.Run("localhost:8080")
+	web.Run(":80")
 }
