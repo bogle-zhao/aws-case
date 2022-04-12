@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{.title}}</title>
+</head>
+<body>
+首页<br/>
+{{.title}} <br/>
+<form action="/user/update" method="POST" enctype="multipart/form-data">
+  <ul>
+    <li>username: <input value="{{.account.UserName}}" name="username" readonly /><br/></li>
+    <li>avatar: <img src="{{.account.Avatar}}" style="width:300px; height: 300px"/></li>
+    <li>Modify avatar: <input type="file" name="avatar"></li>
+    <li><input type="submit" value="修改"><a href="/user/logout">注销</a></li>
+  </ul>
+</form>
+
+
+</body>
+</html>
